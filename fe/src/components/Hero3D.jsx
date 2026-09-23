@@ -15,12 +15,12 @@ export default function Hero3D() {
           <RobotModello emoteAlClick position={[0, -1.7, 0]} scale={0.6} />
         </ScenaRobot>
         <p className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs text-slate-400">
-          Trascina per ruotare · clicca il robot per un saluto
+          Trascina per ruotare · tocca il robot per un saluto
         </p>
       </div>
 
-      <div className="flex flex-col justify-center p-8">
-        <h1 className="text-3xl font-bold leading-tight md:text-4xl">
+      <div className="flex flex-col justify-center p-6 md:p-8">
+        <h1 className="text-2xl font-bold leading-tight sm:text-3xl md:text-4xl">
           Robot per l'industria, la casa e la scuola
         </h1>
         <p className="mt-3 max-w-md text-slate-300">

@@ -39,7 +39,7 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={notifica}>
       {children}
-      <div className="pointer-events-none fixed bottom-4 right-4 z-50 flex w-80 max-w-[calc(100vw-2rem)] flex-col gap-2">
+      <div className="pointer-events-none fixed inset-x-4 bottom-4 z-50 flex flex-col gap-2 sm:inset-x-auto sm:right-4 sm:w-80">
         {toasts.map((t) => (
           <button
             key={t.id}

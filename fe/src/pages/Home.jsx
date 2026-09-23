@@ -45,7 +45,7 @@ export function Home() {
       <Messaggio>{errore}</Messaggio>
       {caricamento && <SkeletonGriglia />}
       {robot && (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="griglia-robot">
           {robot.map((r, i) => <RobotCard key={r.id} robot={r} onToggle={onToggle} indice={i} />)}
         </div>
       )}

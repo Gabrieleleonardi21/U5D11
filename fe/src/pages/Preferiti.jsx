@@ -26,7 +26,7 @@ export function Preferiti() {
         </p>
       )}
       {robot && robot.length > 0 && (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="griglia-robot">
           {robot.map((r, i) => <RobotCard key={r.id} robot={r} onToggle={togli} indice={i} />)}
         </div>
       )}

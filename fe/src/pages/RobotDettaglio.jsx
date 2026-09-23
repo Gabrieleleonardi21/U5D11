@@ -43,7 +43,7 @@ function RobotSimili({ corrente }) {
   return (
     <section>
       <h2 className="mb-4 text-xl font-bold">Altri {etichettaCategoria(corrente.categoria).toLowerCase()}</h2>
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="griglia-robot">
         {simili.map((r, i) => <RobotCard key={r.id} robot={r} onToggle={onToggle} indice={i} />)}
       </div>
     </section>
@@ -76,7 +76,7 @@ export function RobotDettaglio() {
     <div className="space-y-10">
       <div className="grid gap-8 md:grid-cols-2">
         {/* viewer 3D con il corpo del colore della categoria */}
-        <div className="card relative h-[320px] overflow-hidden animate-comparsa md:h-[420px]">
+        <div className="card relative h-[260px] overflow-hidden animate-comparsa md:h-[420px]">
           <Suspense fallback={<div className="h-full animate-pulse bg-white/5" />}>
             <RobotViewer3D colore={COLORE_CATEGORIA[robot.categoria]} />
           </Suspense>
@@ -87,18 +87,19 @@ export function RobotDettaglio() {
 
         <div className="animate-comparsa" style={{ animationDelay: '80ms' }}>
           <div className="flex items-center gap-4">
-            <img src={immagineRobot(robot.nome, 160)} alt="" className="h-20 w-20 rounded-2xl border border-white/10" />
-            <div>
+            <img src={immagineRobot(robot.nome, 160)} alt="" className="h-16 w-16 shrink-0 rounded-2xl border border-white/10 md:h-20 md:w-20" />
+            {/* min-w-0: permette al nome lungo di andare a capo invece di sfondare la colonna */}
+            <div className="min-w-0">
               <span className="text-sm uppercase tracking-wide text-cyan-400">{etichettaCategoria(robot.categoria)}</span>
-              <h1 className="text-3xl font-bold">{robot.nome}</h1>
+              <h1 className="break-words text-2xl font-bold md:text-3xl">{robot.nome}</h1>
               <p className="text-slate-400">{robot.produttore}</p>
             </div>
           </div>
           <p className="mt-4 text-slate-300">{robot.descrizione}</p>
-          <p className="mt-6 text-3xl font-bold">{formattaPrezzo(robot.prezzo)}</p>
+          <p className="mt-6 text-2xl font-bold md:text-3xl">{formattaPrezzo(robot.prezzo)}</p>
 
           {sessione && (
-            <button type="button" onClick={() => togglePreferito(robot)} className="btn btn-primario mt-4">
+            <button type="button" onClick={() => togglePreferito(robot)} className="btn btn-primario mt-4 w-full sm:w-auto">
               {robot.preferito && '♥ Nei preferiti'}
               {!robot.preferito && '♡ Aggiungi ai preferiti'}
             </button>

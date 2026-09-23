@@ -61,7 +61,7 @@ export function TabellaRobot() {
 
   return (
     <section className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-xl font-bold">Catalogo (bozze comprese)</h2>
         {!form && <button type="button" onClick={() => setForm('nuovo')} className="btn btn-primario">+ Nuovo robot</button>}
       </div>
@@ -72,8 +72,8 @@ export function TabellaRobot() {
 
       {caricamento && <SkeletonRighe quante={6} />}
       {robot && (
-        <div className="card overflow-x-auto">
-          <table className="w-full text-sm">
+        <div className="card">
+          <table className="tabella-adattiva w-full text-sm">
             <thead className="text-left text-xs uppercase text-slate-400">
               <tr>
                 <th className="p-3">Nome</th>
@@ -88,17 +88,19 @@ export function TabellaRobot() {
             <tbody>
               {robot.map((r) => (
                 <tr key={r.id} className="border-t border-white/5 transition hover:bg-white/[0.03]">
-                  <td className="p-3 font-medium">{r.nome}<div className="text-xs text-slate-500">{r.produttore}</div></td>
-                  <td className="p-3">{etichettaCategoria(r.categoria)}</td>
-                  <td className="p-3">{formattaPrezzo(r.prezzo)}</td>
-                  <td className="p-3 text-amber-200">{formattaPrezzo(r.prezzoAcquisto)}</td>
-                  <td className="p-3 text-amber-200">{r.fornitore ?? '—'}</td>
-                  <td className="p-3">
+                  {/* senza data-etichetta: su telefono fa da titolo della card */}
+                  <td className="text-left font-medium"><div>{r.nome}<div className="text-xs text-slate-500">{r.produttore}</div></div></td>
+                  <td data-etichetta="Categoria">{etichettaCategoria(r.categoria)}</td>
+                  <td data-etichetta="Prezzo">{formattaPrezzo(r.prezzo)}</td>
+                  <td data-etichetta="Acquisto" className="text-amber-200">{formattaPrezzo(r.prezzoAcquisto)}</td>
+                  <td data-etichetta="Fornitore" className="text-amber-200">{r.fornitore ?? '—'}</td>
+                  <td data-etichetta="Stato">
                     {r.pubblicato && <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-xs text-emerald-300">Pubblicato</span>}
                     {!r.pubblicato && <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-xs text-amber-300">Bozza</span>}
                   </td>
-                  <td className="p-3">
-                    <div className="flex flex-wrap justify-end gap-1">
+                  <td>
+                    {/* su telefono tre bottoni uguali a tutta larghezza, da md in fila a destra */}
+                    <div className="grid flex-1 grid-cols-3 gap-1 pt-1 md:flex md:justify-end md:pt-0">
                       <button type="button" onClick={() => togglePubblicato(r)} className="btn btn-secondario">
                         {r.pubblicato && 'Ritira'}
                         {!r.pubblicato && 'Pubblica'}

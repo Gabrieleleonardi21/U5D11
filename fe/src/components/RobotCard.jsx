@@ -35,7 +35,7 @@ export function RobotCard({ robot, onToggle, indice = 0 }) {
           type="button"
           onClick={clicCuore}
           aria-label={robot.preferito ? 'Togli dai preferiti' : 'Aggiungi ai preferiti'}
-          className="absolute right-3 top-3 z-10 rounded-full bg-slate-950/70 p-2 text-xl leading-none transition hover:scale-110 active:scale-90"
+          className="absolute right-2 top-2 z-10 rounded-full bg-slate-950/70 p-2 text-xl leading-none transition hover:scale-110 active:scale-90 sm:right-3 sm:top-3"
         >
           <span className={`inline-block ${classeCuore}`} onAnimationEnd={() => setCuoreBatte(false)}>
             {robot.preferito && '♥'}
@@ -53,11 +53,11 @@ export function RobotCard({ robot, onToggle, indice = 0 }) {
         />
       </Link>
 
-      <div className="flex flex-1 flex-col gap-1 p-4">
+      <div className="flex flex-1 flex-col gap-1 p-3 sm:p-4">
         <span className="text-xs uppercase tracking-wide text-cyan-400">{etichettaCategoria(robot.categoria)}</span>
-        <Link to={`/robot/${robot.id}`} className="font-semibold hover:text-cyan-300">{robot.nome}</Link>
+        <Link to={`/robot/${robot.id}`} className="break-words font-semibold hover:text-cyan-300">{robot.nome}</Link>
         <span className="text-sm text-slate-400">{robot.produttore}</span>
-        <span className="mt-auto pt-2 text-lg font-bold">{formattaPrezzo(robot.prezzo)}</span>
+        <span className="mt-auto pt-2 font-bold sm:text-lg">{formattaPrezzo(robot.prezzo)}</span>
       </div>
     </article>
   )

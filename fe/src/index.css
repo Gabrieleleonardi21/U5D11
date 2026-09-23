@@ -43,8 +43,9 @@ body {
 
 /* Classi riusate in tutte le pagine, per non ripetere le stesse utility ovunque. */
 @layer components {
+  /* py-2 su telefono per un'area di tocco comoda, py-1.5 da sm in su */
   .btn {
-    @apply inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 sm:py-1.5;
   }
   .btn-primario {
     @apply bg-cyan-500 text-slate-950 hover:bg-cyan-400;
@@ -61,4 +62,36 @@ body {
   .card {
     @apply rounded-2xl border border-white/10 bg-slate-900/60;
   }
+
+  /* Griglia delle card robot: 2 colonne gia' su telefono, poi 3 e 4. Usata da vetrina, preferiti, simili e skeleton. */
+  .griglia-robot {
+    @apply grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4;
+  }
+
+  /* Tabelle dell'admin, mobile first: sotto md ogni <tr> e' una "card" con le celle impilate
+     e l'etichetta della colonna presa da data-etichetta (le celle senza attributo, es. nome e
+     azioni, non hanno etichetta). Da md in su torna una tabella normale. Un solo markup, niente
+     scorrimento orizzontale. */
+  .tabella-adattiva thead {
+    @apply hidden md:table-header-group;
+  }
+  .tabella-adattiva tbody {
+    @apply block md:table-row-group;
+  }
+  .tabella-adattiva tr {
+    @apply block px-4 py-3 md:table-row md:p-0;
+  }
+  .tabella-adattiva td {
+    @apply flex items-center justify-between gap-4 py-1.5 text-right md:table-cell md:p-3 md:text-left;
+  }
+  .tabella-adattiva td[data-etichetta]::before {
+    content: attr(data-etichetta);
+    @apply shrink-0 text-xs uppercase text-slate-500 md:hidden;
+  }
+}
+
+/* Canvas 3D su touch: lo scorrimento verticale col dito resta della pagina, il trascinamento
+   orizzontale ruota il robot. OrbitControls imposta touch-action:none inline, !important lo scavalca. */
+.scena-3d canvas {
+  touch-action: pan-y !important;
 }

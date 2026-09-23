@@ -37,8 +37,8 @@ export function TabellaUtenti() {
       <Messaggio>{errore}</Messaggio>
       {caricamento && <SkeletonRighe quante={3} />}
       {utenti && (
-        <div className="card overflow-x-auto">
-          <table className="w-full text-sm">
+        <div className="card">
+          <table className="tabella-adattiva w-full text-sm">
             <thead className="text-left text-xs uppercase text-slate-400">
               <tr>
                 <th className="p-3">Username</th>
@@ -53,11 +53,11 @@ export function TabellaUtenti() {
                 const seStesso = u.id === sessione.id
                 return (
                   <tr key={u.id} className="border-t border-white/5 transition hover:bg-white/[0.03]">
-                    <td className="p-3 font-medium">{u.username}</td>
-                    <td className="p-3 text-slate-400">{u.email}</td>
-                    <td className="p-3">{u.ruoli.join(', ')}</td>
-                    <td className="p-3 text-right">
-                      <button type="button" onClick={() => cambiaRuolo(u)} disabled={seStesso} className="btn btn-secondario">
+                    <td className="font-medium">{u.username}</td>
+                    <td data-etichetta="Email" className="break-all text-slate-400">{u.email}</td>
+                    <td data-etichetta="Ruoli">{u.ruoli.join(', ')}</td>
+                    <td className="md:text-right">
+                      <button type="button" onClick={() => cambiaRuolo(u)} disabled={seStesso} className="btn btn-secondario mt-1 w-full md:mt-0 md:w-auto">
                         {eAdmin && 'Revoca admin'}
                         {!eAdmin && 'Rendi admin'}
                       </button>

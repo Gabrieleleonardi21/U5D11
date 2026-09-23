@@ -96,8 +96,8 @@ export function RobotForm({ robot, onSalvato, onAnnulla }) {
       </label>
 
       <div className="flex gap-2">
-        <button type="submit" disabled={inCorso} className="btn btn-primario">Salva</button>
-        <button type="button" onClick={onAnnulla} className="btn btn-secondario">Annulla</button>
+        <button type="submit" disabled={inCorso} className="btn btn-primario flex-1 sm:flex-none">Salva</button>
+        <button type="button" onClick={onAnnulla} className="btn btn-secondario flex-1 sm:flex-none">Annulla</button>
       </div>
     </form>
   )

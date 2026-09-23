@@ -22,7 +22,7 @@ export function SkeletonCard() {
 /** Griglia di card fantasma, stessa griglia della vetrina. */
 export function SkeletonGriglia({ quante = 8 }) {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" aria-busy="true">
+    <div className="griglia-robot" aria-busy="true">
       {Array.from({ length: quante }, (_, i) => <SkeletonCard key={i} />)}
     </div>
   )
@@ -48,7 +48,7 @@ export function SkeletonRighe({ quante = 5 }) {
 export function SkeletonDettaglio() {
   return (
     <div className="grid animate-pulse gap-8 md:grid-cols-2" aria-busy="true">
-      <div className="card h-[320px]" />
+      <div className="card h-[260px] md:h-[420px]" />
       <div className="space-y-3">
         <Barra classe="h-3 w-1/4" />
         <Barra classe="h-8 w-2/3" />
