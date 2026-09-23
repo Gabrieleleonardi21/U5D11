@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+/* Animazioni riusabili come classi Tailwind (animate-comparsa, animate-scivola, animate-battito). */
+@theme {
+  --animate-comparsa: comparsa 0.4s ease-out both;
+  --animate-scivola: scivola 0.25s ease-out both;
+  --animate-battito: battito 0.35s ease-out;
+
+  /* card che compaiono dal basso */
+  @keyframes comparsa {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  /* toast che entra da destra */
+  @keyframes scivola {
+    from { opacity: 0; transform: translateX(24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  /* cuore che "batte" quando si aggiunge un preferito */
+  @keyframes battito {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+  }
+}
+
+/* Chi ha chiesto meno movimento non vede le animazioni. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-comparsa, .animate-scivola, .animate-battito {
+    animation: none;
+  }
+}
+
+body {
+  margin: 0;
+  background: #020617; /* slate-950: stesso colore del Layout, evita il flash bianco */
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* Classi riusate in tutte le pagine, per non ripetere le stesse utility ovunque. */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primario {
+    @apply bg-cyan-500 text-slate-950 hover:bg-cyan-400;
+  }
+  .btn-secondario {
+    @apply border border-white/15 bg-white/5 hover:bg-white/10;
+  }
+  .btn-pericolo {
+    @apply border border-red-500/40 bg-red-500/10 text-red-200 hover:bg-red-500/20;
+  }
+  .campo {
+    @apply w-full rounded-lg border border-white/15 bg-slate-900 px-3 py-2 text-slate-100 outline-none focus:border-cyan-400;
+  }
+  .card {
+    @apply rounded-2xl border border-white/10 bg-slate-900/60;
+  }
+}
