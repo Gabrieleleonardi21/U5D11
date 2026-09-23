@@ -87,6 +87,11 @@ Il seeder (`config/DatiIniziali.java`) e' idempotente e crea, se mancano:
 Test (usano il database locale): `cd be && ./mvnw test` — `LivelliAccessoTest` verifica i tre
 livelli sugli stessi URL.
 
+Nota per lo sviluppo del frontend: dopo molti aggiornamenti a caldo dei componenti Three.js
+(`fe/src/components/tre/`) il dev server accumula piu' versioni degli stessi moduli e i canvas 3D
+possono smettere di disegnare quando si cambia pagina. Non e' un bug del codice (la build di
+produzione non ne soffre): basta riavviare `npm run dev`.
+
 ## Deploy su Render
 
 1. Repository Git con `be/`, `fe/`, `render.yaml` nella radice.

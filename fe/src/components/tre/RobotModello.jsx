@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAnimations, useGLTF } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
 import { LoopOnce } from 'three'
 import { clone as clonaConScheletro } from 'three/examples/jsm/utils/SkeletonUtils.js'
 
@@ -34,21 +33,6 @@ export function RobotModello({ colore, emoteAlClick = false, ...props }) {
       }
     })
   }, [copia, colore])
-
-  // DEBUG TEMPORANEO
-  useEffect(() => {
-    let mesh = 0
-    copia.traverse((o) => { if (o.isMesh) mesh += 1 })
-    console.log('[3D] mount', { colore, mesh, visibile: copia.visible })
-    return () => console.log('[3D] unmount', { colore })
-  }, [copia, colore])
-  const frame = useRef(0)
-  useFrame((stato) => {
-    frame.current += 1
-    if (frame.current % 90 === 1) {
-      console.log('[3D] frame', { colore, triangoli: stato.gl.info.render.triangles, figli: stato.scene.children.length, gruppoInScena: Boolean(gruppo.current && gruppo.current.parent) })
-    }
-  })
 
   // animazione di base
   useEffect(() => {
@@ -86,8 +70,8 @@ export function RobotModello({ colore, emoteAlClick = false, ...props }) {
     if (emoteAlClick) document.body.style.cursor = tipo
   }
 
-  // dispose={null}: geometrie e materiali sono condivisi con la scena in cache di useGLTF;
-  // senza, smontando l'hero R3F li distruggerebbe e il viewer del dettaglio resterebbe vuoto.
+  // dispose={null}: geometrie e materiali sono condivisi con la scena in cache di useGLTF,
+  // non vanno distrutti quando un'istanza si smonta (regola di drei per le scene riusate).
   return (
     <group
       ref={gruppo}
